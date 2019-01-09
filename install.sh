@@ -36,6 +36,8 @@ ESH_DIR='$SCRIPT_RPATH'
 export ESH_DIR
 
 . "\$ESH_DIR/base"
+
+[ -r "\$HOME/.profile.local" ] && . "\$HOME/.profile.local"
 EOF
 
     ln -sf .profile $INSTALL_DIR/.zprofile
