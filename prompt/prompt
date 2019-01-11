@@ -1,0 +1,48 @@
+#!/bin/sh
+# -*- mode: sh -*-
+
+### python
+prompt_python()
+{
+    prompt_python=
+    if [ -n "$VIRTUAL_ENV" ] && [ "$VIRTUAL_ENV" != "default" ]; then
+        prompt_python="py:$VIRTUAL_ENV"
+    fi
+}
+
+prompt_python_printf()
+{
+    if prompt_python; then
+        [ -z "$prompt_python" ] || printf "$1" "$prompt_python"
+    fi
+}
+
+### ruby
+prompt_ruby()
+{
+    prompt_ruby=
+
+    prompt_rbenv
+    prompt_ruby="$prompt_rbenv"
+}
+
+prompt_rbenv()
+{
+    prompt_rbenv=
+
+    if [ -n "$RBENV_VERSION" ]; then
+        prompt_rbenv="rbenv:$RBENV_VERSION"
+    else
+        prompt_rbenv__version="`rbenv local 2>/dev/null`"
+        if [ -n "$prompt_rbenv__version" ]; then
+            prompt_rbenv="rbenv:$prompt_rbenv__version"
+        fi
+    fi
+}
+
+prompt_ruby_printf()
+{
+    if prompt_ruby; then
+        [ -z "$prompt_ruby" ] || printf "$1" "$prompt_ruby"
+    fi
+}
