@@ -22,10 +22,10 @@ esh_reload()
 }
 
 esh_update()
-{
+(
     cd "$ESH_DIR" &&
-        git update --no-rebase --ff-only
-}
+        git pull --no-rebase --ff-only
+)
 
 
 ### BOOLEAN
@@ -133,8 +133,12 @@ _path_add()
                     _path_add_var MANPATH "$_path_add__loc1" "$_path_add__loc2" "$_path_add__p/share/man"
                 [ -d "$_path_add__p/sbin" ] &&
                     _path_add_var PATH "$_path_add__loc1" "$_path_add__loc2" "$_path_add__p/sbin"
+                _path_activate && [ -r "$_path_add__p/bin/$_path_activate" ] &&
+                    . "$_path_add__p/bin/$_path_activate"
             else
                 _path_add_var PATH "$_path_add__loc1" "$_path_add__loc2" "$_path_add__p"
+                _path_activate && [ -r "$_path_add__p/$_path_activate" ] &&
+                    . "$_path_add__p/$_path_activate"
             fi
         fi
     done
@@ -256,6 +260,20 @@ path_addin()
     path_addin_pre "$@"
 }
 
+_path_activate()
+{
+    if [ -n "$1" ]; then
+        _path_activate="$1"
+    else
+        [ -z "$_path_activate" ] && return 1
+        return 0
+    fi
+}
+
+_path_deactivate()
+{
+    _path_activate=
+}
 
 case "$ESH_OS" in
     Darwin) path_add_base /opt/local /sw /usr/X11R6 ;;
