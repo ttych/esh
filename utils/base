@@ -16,15 +16,22 @@ esh_autoload()
 
 autoload_add()
 {
-    [ -z "$1" ] && return 1
-    [ -z "$2" ] && return 1
+    if [ $# -eq 1 ]; then
+        autoload_add__mode=base
+    else
+        autoload_add__mode="$1"
+        shift
+    fi
 
-    case $1 in
+    [ -z "$1" ] && return 1
+    [ -r "$1" ] || return 1
+
+    case $autoload_add__mode in
         [Bb][Aa][Ss][Ee])
-            AUTOLOAD_BASE="${AUTOLOAD_BASE:+$AUTOLOAD_BASE ; }. \"$2\""
+            AUTOLOAD_BASE="${AUTOLOAD_BASE:+$AUTOLOAD_BASE ; }. \"$1\""
             ;;
         [Ii][Nn][Tt][Ee][Rr][Aa][Cc][Tt][Ii][Vv][Ee])
-            AUTOLOAD_INTERACTIVE="${AUTOLOAD_INTERACTIVE:+$AUTOLOAD_INTERACTIVE ; }. \"$2\""
+            AUTOLOAD_INTERACTIVE="${AUTOLOAD_INTERACTIVE:+$AUTOLOAD_INTERACTIVE ; }. \"$1\""
         ;;
     esac
 }
