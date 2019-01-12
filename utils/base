@@ -3,14 +3,41 @@
 
 
 ############################################
+# autoload
+############################################
+AUTOLOAD_BASE=
+AUTOLOAD_INTERACTIVE=
+
+esh_autoload()
+{
+    eval "$AUTOLOAD_BASE"
+    esh_interactive && eval "$AUTOLOAD_INTERACTIVE"
+}
+
+autoload_add()
+{
+    [ -z "$1" ] && return 1
+    [ -z "$2" ] && return 1
+
+    case $1 in
+        [Bb][Aa][Ss][Ee])
+            AUTOLOAD_BASE="${AUTOLOAD_BASE:+$AUTOLOAD_BASE ; }. \"$2\""
+            ;;
+        [Ii][Nn][Tt][Ee][Rr][Aa][Cc][Tt][Ii][Vv][Ee])
+            AUTOLOAD_INTERACTIVE="${AUTOLOAD_INTERACTIVE:+$AUTOLOAD_INTERACTIVE ; }. \"$2\""
+        ;;
+    esac
+}
+
+
+############################################
 # utils
 ############################################
-
 esh_utils_add()
 {
     [ -n "$1" ] && [ -n "$2" ] || return 1
 
-    _path_activate "default.lib"
+    _path_activate "autoload.lib"
     for esh_utils_add__h in "$HOME" "$HOME_ALT"; do
         [ -z "$esh_utils_add__h" ] && continue
         [ ! -d "$esh_utils_add__h" ] && continue
@@ -20,7 +47,11 @@ esh_utils_add()
     _path_deactivate
 }
 
-############################################
 
 esh_utils_add path_add_pre utils
 esh_utils_add path_addin_pre tools
+
+############################################
+
+
+esh_autoload
