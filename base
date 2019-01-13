@@ -184,6 +184,11 @@ _path_purge()
     _path_merger
 }
 
+path_purge()
+{
+    _path_purge "$@"
+}
+
 
 path_add()
 {
@@ -283,6 +288,12 @@ case "$ESH_OS" in
 esac
 
 path_addin /opt
+
+
+path_pprint()
+{
+    echo "$PATH" | tr ':' '\012'
+}
 
 
 ### PREFERRED SHELLS
