@@ -1,6 +1,7 @@
 #!/bin/sh
 # -*- mode: sh -*-
 
+
 ### python
 prompt_python()
 {
@@ -16,6 +17,7 @@ prompt_python_printf()
         [ -z "$prompt_python" ] || printf "$1" "$prompt_python"
     fi
 }
+
 
 ### ruby
 prompt_ruby()
@@ -44,5 +46,37 @@ prompt_ruby_printf()
 {
     if prompt_ruby; then
         [ -z "$prompt_ruby" ] || printf "$1" "$prompt_ruby"
+    fi
+}
+
+
+### git
+prompt_git()
+{
+    prompt_git=
+    if _git_info 2>/dev/null; then
+        prompt_git="${_git_info__branch}"
+        if $_git_info__is_bare; then
+            prompt_git="bare:${prompt_git}"
+        else
+            if $_git_info__diff_staged ||
+               $_git_info__diff ||
+               $_git_info__untracked ; then
+                prompt_git__staged=-
+                prompt_git__diff=-
+                prompt_git__untracked=-
+                $_git_info__diff_staged && prompt_git__staged=*
+                $_git_info__diff && prompt_git__diff=*
+                $_git_info__untracked && prompt_git__untracked=u
+                prompt_git="${prompt_git}:${prompt_git__staged}${prompt_git__diff}${prompt_git__untracked}"
+            fi
+        fi
+    fi
+}
+
+prompt_git_printf()
+{
+    if prompt_git; then
+        [ -z "$prompt_git" ] || printf "$1" "$prompt_git"
     fi
 }
