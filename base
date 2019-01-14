@@ -16,6 +16,11 @@ ESH_SH_DEF=`getent passwd $USER | cut -d':' -f7`
 ESH_SH_CUR_SHORT="${ESH_SH_CUR##*/}"
 export ESH_SH_INIT ESH_SH_CUR ESH_SH_LOGIN ESH_SH_DEF ESH_SH_CUR_SHORT
 
+SHELL="${SHELL:-$ESH_SH_CUR}"
+SHELL_SHORT="${SHELL_SHORT:-$ESH_SH_CUR_SHORT}"
+export SHELL SHELL_SHORT
+
+
 esh_reload()
 {
     [ -r "$ESH_DIR/base" ] && . "$ESH_DIR/base"
