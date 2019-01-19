@@ -1,6 +1,13 @@
 #!/bin/sh
 # -*- mode: sh -*-
 
+### xterm
+xterm()
+(
+    xterm -lf "$HOME/.log/Xterm.$HOSTNAME.$(date +%Y%m%d%H%M%S).$RANDOM.log"
+)
+
+
 ### emacs
 
 EMACS=`command -v emacs`
