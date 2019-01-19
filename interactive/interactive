@@ -2,10 +2,14 @@
 # -*- mode: sh -*-
 
 ### xterm
-xterm()
-(
-    xterm -lf "$HOME/.log/Xterm.$HOSTNAME.$(date +%Y%m%d%H%M%S).$RANDOM.log"
-)
+# xterm()
+# {
+#     if [ -z "$XTERM_PATH" ]; then
+#         XTERM_PATH="$(which xterm | grep '^/')"
+#         [ -z "$XTERM_PATH" ] && return 1
+#     fi
+#     $XTERM_PATH -lf "$HOME/.log/Xterm.$HOSTNAME.$(date +%Y%m%d%H%M%S).$RANDOM.log"
+# }
 
 
 ### emacs
