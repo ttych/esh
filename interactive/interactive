@@ -84,6 +84,7 @@ pycharm()
 ### ls
 alias l='ls'
 alias ll='ls -l'
+alias l1='ls -1tr'
 
 case $ESH_OS in
     Linux)
