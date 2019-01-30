@@ -1,0 +1,6 @@
+#!/bin/sh
+# -*- mode: shell -*-
+
+if _want_auto_tmux; then
+    _ensure_tmux_is_running
+fi

@@ -364,7 +364,8 @@ esh_module_load()
     esh_interactive && [ -r "$esh_module_load__m/interactive" ] && . "$esh_module_load__m/interactive"
 }
 
-for esh_module in host \
+for esh_module in tmux \
+                      host \
                       $ESH_SH_CUR_SHORT \
                       ssh-agent \
                       utils \
