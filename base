@@ -355,16 +355,25 @@ fi
 esh_module_load()
 {
     [ $# -ne 1 ] && return 1
+    esh_module_load__m=
+    esh_module_load__m_alt=
     case "$1" in
         /*) esh_module_load__m="$1" ;;
-        *) esh_module_load__m="$ESH_DIR/$1" ;;
+        *) esh_module_load__m="$ESH_DIR/modules/$1"
+           esh_module_load__m_alt="$ESH_DIR/$1"
+           ;;
     esac
-    [ -d "$esh_module_load__m" ] || return 1
-    [ -r "$esh_module_load__m/base" ] && . "$esh_module_load__m/base"
-    esh_interactive && [ -r "$esh_module_load__m/interactive" ] && . "$esh_module_load__m/interactive"
+    if [ -r "$esh_module_load__m" ]; then
+        . "$esh_module_load__m"
+    elif [ -d "$esh_module_load__m" ]; then
+        [ -r "$esh_module_load__m/base" ] && . "$esh_module_load__m/base"
+        esh_interactive && [ -r "$esh_module_load__m/interactive" ] &&
+            . "$esh_module_load__m/interactive"
+    fi
 }
 
-for esh_module in tmux \
+for esh_module in terminal \
+                      tmux \
                       host \
                       $ESH_SH_CUR_SHORT \
                       ssh-agent \
