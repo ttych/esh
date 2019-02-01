@@ -29,6 +29,7 @@ esh_reload()
 esh_update()
 (
     cd "$ESH_DIR" &&
+        git reset --hard &&
         git pull --no-rebase --ff-only
 )
 
