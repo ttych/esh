@@ -302,6 +302,20 @@ path_pprint()
 }
 
 
+### PROCESS
+_process_ppid()
+{
+    _process_ppid=$(ps -p "${1:-$$}" -o ppid=)
+    _process_ppid="${_process_ppid##* }"
+}
+
+_process_comm()
+{
+    _process_comm=$(ps -p "${1:-$$}" -o comm=)
+    _process_comm="${_process_comm##* }"
+}
+
+
 ### PREFERRED SHELLS
 preferred_shells_list()
 {
