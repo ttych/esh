@@ -364,11 +364,12 @@ esh_module_load()
            ;;
     esac
     if [ -r "$esh_module_load__m" ]; then
-        . "$esh_module_load__m"
-    elif [ -d "$esh_module_load__m" ]; then
-        [ -r "$esh_module_load__m/base" ] && . "$esh_module_load__m/base"
-        esh_interactive && [ -r "$esh_module_load__m/interactive" ] &&
-            . "$esh_module_load__m/interactive"
+        ESH_MODULE_DIR="${esh_module_load__m%/?*}" . "$esh_module_load__m"
+    elif [ -d "$esh_module_load__m_alt" ]; then
+        [ -r "$esh_module_load__m_alt/base" ] &&
+            ESH_MODULE_DIR="${esh_module_load__m_alt}" . "$esh_module_load__m_alt/base"
+        esh_interactive && [ -r "$esh_module_load__m_alt/interactive" ] &&
+            ESH_MODULE_DIR="${esh_module_load__m_alt}" . "$esh_module_load__m_alt/interactive"
     fi
 }
 
@@ -380,7 +381,7 @@ for esh_module in terminal \
                       utils \
                       interactive
 do
-    ESH_MODULE_DIR="$ESH_DIR/$esh_module" esh_module_load "$esh_module"
+        esh_module_load "$esh_module"
 done
 
 
