@@ -105,6 +105,10 @@ case $ESH_OS in
 esac
 
 
+### mv
+alias mvi='mv -i'
+
+
 ### terms
 xtermadm() { xterm -name xtermadm "$@" & }
 admterm() { xterm -name xtermadm "$@" & }
