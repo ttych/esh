@@ -389,11 +389,11 @@ esh_module_load()
 }
 
 for esh_module in terminal \
-                      tmux \
                       host \
+                      utils \
+                      tmux \
                       $ESH_SH_CUR_SHORT \
                       ssh-agent \
-                      utils \
                       interactive
 do
         esh_module_load "$esh_module"
