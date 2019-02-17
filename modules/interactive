@@ -36,6 +36,10 @@ ESHELL="${ESH_SH_CUR_SHORT}_login_shell"
 export ESHELL
 
 
+### git
+g() { git "$@" }
+
+
 ### vim
 
 # g reclamed for git !
