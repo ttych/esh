@@ -37,7 +37,10 @@ export ESHELL
 
 
 ### git
-g() { git "$@" }
+g()
+{
+    git "$@"
+}
 
 
 ### vim
