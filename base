@@ -391,6 +391,7 @@ esh_module_load()
 for esh_module in terminal \
                       host \
                       utils \
+                      utilsh \
                       tmux \
                       $ESH_SH_CUR_SHORT \
                       ssh-agent \
