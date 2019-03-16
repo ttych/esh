@@ -37,7 +37,9 @@ export ESH_DIR
 
 . "\$ESH_DIR/base"
 
-[ -r "\$HOME/.profile.local" ] && . "\$HOME/.profile.local"
+if [ -r "\$HOME/.profile.local" ]; then
+    . "\$HOME/.profile.local"
+fi
 EOF
 
     ln -sf .profile $INSTALL_DIR/.zprofile

@@ -5,9 +5,13 @@
 ###################
 # ##### ESH ##### #
 ###################
-[ -r "$ESH_DIR/prompt/prompt" ] &&
-    . "$ESH_DIR/prompt/prompt"
+[ -r "$ESH_DIR/prompt/prompt" ] && . "$ESH_DIR/prompt/prompt"
 
+
+#######################
+# ##### COLORS  ##### #
+#######################
+[ -r "$ESH_DIR/prompt/colors" ] && . "$ESH_DIR/prompt/colors"
 
 
 #######################
@@ -132,11 +136,6 @@ complete -u -A hostname finger
 complete -u su usermod userdel passwd sux talk ytalk
 complete -v readonly unset
 
-
-#######################
-# ##### COLORS  ##### #
-#######################
-[ -r "$SHUX_DIR/$SHUX_SH_CUR_SHORT/colors" ] && . "$SHUX_DIR/$SHUX_SH_CUR_SHORT/colors"
 
 
 ##############################

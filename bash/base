@@ -1,12 +1,10 @@
 #!/bin/sh
 
-######################
-# ##### GLOBAL ##### #
-######################
-function whence
-{
-    type -p "$@"
-}
+
+# function whence
+# {
+#     type -p "$@"
+#}
 
 
 ###################
@@ -102,4 +100,3 @@ shopt -u xpg_echo      # If set, the echo builtin expands backslash-escape seque
 # ##### MAIL ##### #
 ####################
 #unset MAILCHECK
-
