@@ -60,7 +60,7 @@ shopt -s cmdhist       # If set, Bash attempts to save all lines of a multiple-l
 #shopt -s dotglob      # If set, Bash includes filenames beginning with a . in the results of filename expansion.
 #shopt -s execfail     # If this is set, a non-interactive shell will not exit if it cannot execute the file specified as an argument to the exec builtin command. An interactive shell does not exit if exec fails.
 #shopt -s expand_aliases # If set, aliases are expanded as described below under Aliases, Aliases. This option is enabled by default for interactive shells.
-shopt -s extdebug      # If set, behavior intended for use by debuggers is enabled:
+#shopt -s extdebug      # If set, behavior intended for use by debuggers is enabled:
                        #        The -F option to the declare builtin (see Bash Builtins) displays the source file name and line number corresponding to each function name supplied as an argument.
                        #        If the command run by the DEBUG trap returns a non-zero value, the next command is skipped and not executed.
                        #        If the command run by the DEBUG trap returns a value of 2, and the shell is executing in a subroutine (a shell function or a shell script executed by the . or source builtins), a call to return is simulated.
