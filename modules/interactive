@@ -14,14 +14,22 @@
 
 ### emacs
 
-EMACS=`command -v emacs`
-[ -z "$EMACS" ] && EMACS=`command -v xemacs`
-EMACS=${EMACS:-:}
+_emacs()
+{
+    if [ -z "$EMACS" ] || [ ! -x "$EMACS" ]; then
+        EMACS=`command -v emacs`
+        [ -z "$EMACS" ] && EMACS=`command -v xemacs`
+        EMACS=${EMACS:-:}
+    fi
+    $EMACS "$@"
+}
+
 #e() { emacs -fn -\*-fixed-\*-12-\* "$@" & }
 e()
 {
-    $EMACS "$@" &
+    _emacs "$@" &
 }
+
 ee()
 {
     for ee__f; do
@@ -29,8 +37,15 @@ ee()
     done
 }
 
-alias ne='$EMACS -nw'
-alias neq='$EMACS -quick -nw'
+et()
+{
+    _emacs -nw "$@"
+}
+
+etq()
+{
+    et -quick "$@"
+}
 
 ESHELL="${ESH_SH_CUR_SHORT}_login_shell"
 export ESHELL
