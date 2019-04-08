@@ -6,8 +6,11 @@
 prompt_python()
 {
     prompt_python=
-    if [ -n "$VIRTUAL_ENV" ] && [ "$VIRTUAL_ENV" != "default" ]; then
-        prompt_python="py:$VIRTUAL_ENV"
+    if [ -n "$VIRTUAL_ENV" ]; then
+        prompt_python__venv_short="${VIRTUAL_ENV##*/}"
+        if [ "$prompt_python__venv_short" != 'default' ]; then
+            prompt_python="py:$prompt_python__venv_short"
+        fi
     fi
 }
 
