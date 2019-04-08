@@ -262,7 +262,7 @@ prompt_ret_code()
 prompt_work_post_cwd()
 {
     prompt_git
-    prompt_work_post_cwd="\[${COLOR_YELLOW}\]${prompt_git:+ ($prompt_git)}\[${COLOR_OFF}\]"
+    prompt_work_post_cwd="\[${COLOR_YELLOW}\]${prompt_git:+($prompt_git)}\[${COLOR_OFF}\]"
 }
 
 prompt_work_pre()
@@ -280,14 +280,20 @@ prompt_work_jobs()
     fi
 }
 
+prompt_work_status()
+{
+    prompt_git
+    prompt_python
+    prompt_ruby
+    prompt_work_status="\[${COLOR_YELLOW}\]${prompt_git:+($prompt_git) }${prompt_python:+($prompt_python) }${prompt_ruby:+($prompt_ruby) }\[${COLOR_OFF}\]"
+    prompt_work_status="${prompt_work_status:+\n$prompt_work_status}"
+}
+
 prompt_work_command()
 {
     prompt_ret_code
-    prompt_work_jobs
-    prompt_work_post_cwd
-    prompt_work_pre
-    PS1="${prompt_ret_code:+$prompt_ret_code\n}${COLOR_B_GREEN}\u${COLOR_OFF}@${COLOR_B_GREEN}\h${COLOR_OFF}:${COLOR_B_BLUE}\w${COLOR_OFF}${prompt_work_post_cwd}
-${prompt_work_pre}\[${COLOR_GREEN}\]${prompt_work_jobs}\$\[${COLOR_OFF}\] "
+    prompt_work_status
+    PS1="${prompt_ret_code:+$prompt_ret_code\n}${COLOR_B_GREEN}\u${COLOR_OFF}@${COLOR_B_GREEN}\h${COLOR_OFF}:${COLOR_B_BLUE}\w${COLOR_OFF}${prompt_work_status}\n\[${COLOR_GREEN}\]\$\[${COLOR_OFF}\] "
 }
 
 prompt_work()
