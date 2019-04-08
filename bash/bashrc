@@ -285,8 +285,8 @@ prompt_work_status()
     prompt_git
     prompt_python
     prompt_ruby
-    prompt_work_status="\[${COLOR_YELLOW}\]${prompt_git:+($prompt_git) }${prompt_python:+($prompt_python) }${prompt_ruby:+($prompt_ruby) }\[${COLOR_OFF}\]"
-    prompt_work_status="${prompt_work_status:+\n$prompt_work_status}"
+    prompt_work_status="${prompt_git:+($prompt_git) }${prompt_python:+($prompt_python) }${prompt_ruby:+($prompt_ruby) }"
+    prompt_work_status="${prompt_work_status:+\n\[${COLOR_YELLOW}\]$prompt_work_status}\[${COLOR_OFF}\]"
 }
 
 prompt_work_command()
