@@ -54,7 +54,11 @@ export ESHELL
 ### git
 g()
 {
-    git "$@"
+    if [ -z "$G" ]; then
+        G=`command -v hub`
+        [ -z "$G" ] && G=git
+    fi
+    "$G" "$@"
 }
 
 
