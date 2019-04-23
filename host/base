@@ -1,7 +1,36 @@
 #!/bin/sh
-# -*- mode: shell -*-
+# -*- mode: sh -*-
 
 ### LANG
+lang_support()
+{
+    [ -z "$1" ] && return 1
+    locale -a | grep -q "^${1}$"
+}
+
+lang_charmap_support()
+{
+    [ -z "$1" ] && return 1
+    locale -m | grep -q "^${1}$"
+}
+
+lang_autoset()
+{
+    if lang_charmap_support 'UTF-8'; then
+        for lang in en_US.utf8 fr_FR.utf8 C.UTF-8; do
+            if [ "$LANG" = "$lang" ]; then
+                break
+            fi
+            if lang_support "$lang"; then
+                export LANG="$lang"
+                break
+            fi
+        done
+    fi
+}
+
+lang_autoset
+
 if [ -z "$LANG" ]; then
     LANG=C
     export LANG
