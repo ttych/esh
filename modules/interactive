@@ -14,14 +14,18 @@
 
 ### emacs
 
+_emacs_guess()
+{
+    if [ -z "$_EMACS" ] || [ "$_EMACS" = ":" ]; then
+        _EMACS=`command -v emacs`
+        [ -z "$_EMACS" ] && _EMACS=`command -v xemacs`
+        _EMACS=${_EMACS:-:}
+    fi
+}
 _emacs()
 {
-    if [ -z "$EMACS" ] || [ ! -x "$EMACS" ]; then
-        EMACS=`command -v emacs`
-        [ -z "$EMACS" ] && EMACS=`command -v xemacs`
-        EMACS=${EMACS:-:}
-    fi
-    $EMACS "$@"
+    _emacs_guess
+    $_EMACS "$@"
 }
 
 #e() { emacs -fn -\*-fixed-\*-12-\* "$@" & }
@@ -46,6 +50,34 @@ etq()
 {
     et -quick "$@"
 }
+
+_emacsclient_guess()
+{
+    if [ -z "$_EMACSCLIENT" ] || [ "$_EMACSCLIENT" = ":" ]; then
+        _EMACSCLIENT=`command -v emacsclient`
+        [ -z "$_EMACSCLIENT" ] && _EMACSCLIENT=`command -v xemacsclient`
+         _EMACSCLIENT=${_EMACSCLIENT:-:}
+    fi
+}
+_emacsclient()
+{
+    _emacsclient_guess
+    $_EMACSCLIENT "$@"
+}
+
+em()
+{
+    ALTERNATE_EDITOR="" TMPDIR="/tmp" _emacsclient --tty "$@"
+}
+emk()
+{
+    em -e '(kill-emacs)'
+}
+emx()
+{
+    em -e '(client-save-kill-emacs)'
+}
+
 
 ESHELL="${ESH_SH_CUR_SHORT}_login_shell"
 export ESHELL
