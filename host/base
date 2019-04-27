@@ -5,13 +5,13 @@
 lang_support()
 {
     [ -z "$1" ] && return 1
-    locale -a | grep -q "^${1}$"
+    locale -a 2>/dev/null | grep -q "^${1}$"
 }
 
 lang_charmap_support()
 {
     [ -z "$1" ] && return 1
-    locale -m | grep -q "^${1}$"
+    locale -m 2>/dev/null | grep -q "^${1}$"
 }
 
 lang_autoset()
