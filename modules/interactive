@@ -28,6 +28,12 @@ _emacs()
     $_EMACS "$@"
 }
 
+_emacs_reset()
+{
+    _EMACS=
+    _EMACSCLIENT=
+}
+
 #e() { emacs -fn -\*-fixed-\*-12-\* "$@" & }
 e()
 {
